@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'geocoder'
+
+Geocoder.configure(lookup: :google)
+query    = ARGV.join(' ')
+results  = Geocoder.search query
+result   = results.first
+lat      = result.coordinates.first
+lon      = result.coordinates.last
+address  = result.address
+city     = if result.state.eql?("District of Columbia")
+  "DC"
+else
+  result.city
+end
+
+if $stdout.tty?
+  puts "City:      #{city}"
+  puts "Latitude:  #{lat}"
+  puts "Longitude: #{lon}"
+  puts "Address:   #{address}"
+else
+  print "--lat #{lat} --lon #{lon} --address #{address.gsub(/\s/, '-').gsub(/,/, '_')} --city #{city.gsub(/\s+/, '-')}"
+end
