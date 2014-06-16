@@ -8,6 +8,15 @@ class Hash
   end
 end
 
+def feature_to_string(feature)
+  [
+    "  Name:      #{feature.properties['name']}",
+    "  Address:   #{feature.properties['address']}",
+    "  Latitude:  #{feature.geometry.y}",
+    "  Longitude: #{feature.geometry.x}"
+  ].join("\n")
+end
+
 def features_eql?(f, feature)
   f.geometry.x.eql?(feature.geometry.x) &&
     f.geometry.y.eql?(feature.geometry.y)
@@ -16,6 +25,8 @@ end
 def add_feature(feature_collection, feature)
   feature_collection.features.reject! { |f| features_eql?(f, feature) }
   feature_collection.features << feature
+  puts "Added the following:"
+  puts feature_to_string(feature)
   feature_collection
 end
 
