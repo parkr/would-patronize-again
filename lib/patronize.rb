@@ -8,11 +8,24 @@ class Hash
   end
 end
 
+def features_eql?(f, feature)
+  f.geometry.x.eql?(feature.geometry.x) &&
+    f.geometry.y.eql?(feature.geometry.y)
+end
+
+def add_feature(feature_collection, feature)
+  feature_collection.features.reject! { |f| features_eql?(f, feature) }
+  feature_collection.features << feature
+  feature_collection
+end
+
 def add_feature_to_city(city, options)
   p options
-  features = city_features_collection city
-  features.features << feature_for_input(options)
-  write_features_for_city city, features
+  write_features_for_city(
+    city,
+    add_feature(
+      city_features_collection(city),
+      feature_for_input(options)))
 end
 
 def city_geojson(city)
