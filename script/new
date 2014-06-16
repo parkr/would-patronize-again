@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require File.expand_path('../lib/patronize.rb', File.dirname(__FILE__))
+require 'mercenary'
+
+# 1. Get Feature Info
+Mercenary.program(:new) do |n|
+  n.syntax "script/new <city> [options]"
+
+  n.option 'name', '-n', '--name NAME', 'The name of the establishment'
+  n.option 'marker', '-m', '--marker SYMBOL', 'The marker symbol for the establishment'
+  n.option 'address', '-a', '--address ADDR', 'The address of the establishment'
+
+  n.option 'lat', '-L', '--lat COORD', 'The latitude of the establishment'
+  n.option 'lon', '-l', '--lon COORD', 'The longitude of the establishment'
+
+  n.action do |args, options|
+    city = args.first || -> { abort "Specify a city." }.call
+    add_feature_to_city city, options
+  end
+end
