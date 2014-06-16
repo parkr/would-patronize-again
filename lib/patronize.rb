@@ -1,19 +1,30 @@
+require 'json'
 require 'geo_ruby'
 require 'geo_ruby/geojson'
 
+class Hash
+  def as_json(options)
+    self
+  end
+end
+
 def add_feature_to_city(city, options)
+  p options
   features = city_features_collection city
   features.features << feature_for_input(options)
   write_features_for_city city, features
 end
 
 def city_geojson(city)
-  city_geojson_file = "#{city}.geojson"
-  geojson = if File.exists? city_geojson_file
-    File.read city_geojson_file
+  geojson = if File.exists? city_geojson_file(city)
+    File.read city_geojson_file(city)
   else
     ""
   end
+end
+
+def city_geojson_file(city)
+  "cities/#{city}.geojson"
 end
 
 def city_features_collection(city)
@@ -27,7 +38,7 @@ end
 
 def feature_for_input(options)
   GeoRuby::GeojsonFeature.new(
-    GeoRuby::SimpleFeatures::Point.from_x_y(options.fetch('lat'), options.fetch('lon')),
+    GeoRuby::SimpleFeatures::Point.from_x_y(options.fetch('lon'), options.fetch('lat')),
     {
       "marker-size"   => 'large',
       "marker-color"  => '#BE9A6B',
@@ -39,7 +50,7 @@ def feature_for_input(options)
 end
 
 def write_features_for_city(city, city_features)
-  File.open(city_geojson_file, 'wb') do |f|
+  File.open(city_geojson_file(city), 'wb') do |f|
     f.puts city_features.to_json
   end
 end

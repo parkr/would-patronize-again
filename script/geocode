@@ -22,5 +22,10 @@ if $stdout.tty?
   puts "Longitude: #{lon}"
   puts "Address:   #{address}"
 else
-  print "--lat #{lat} --lon #{lon} --address #{address.gsub(/\s/, '-').gsub(/,/, '_')} --city #{city.gsub(/\s+/, '-')}"
+  print [
+    "--lat #{lat}",
+    "--lon #{lon}",
+    "--address #{address.gsub(/\s/, '+').gsub(/,/, '_')}",
+    "--city #{city.gsub(/\s+/, '+')}"
+  ].join(' ')
 end
