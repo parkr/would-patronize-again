@@ -4,7 +4,7 @@ require File.expand_path('../lib/patronize.rb', File.dirname(__FILE__))
 require 'mercenary'
 
 def sanitize_options(options)
-  options["address"].gsub!(/_/, ',').gsub!(/\+/, ' ')
+  options["address"].to_s.gsub(/_/, ',').gsub(/\+/, ' ')
   options
 end
 
