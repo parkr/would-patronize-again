@@ -54,14 +54,14 @@ end
 def city_features_collection(city)
   geojson = city_geojson(city)
   if geojson.nil? || geojson.empty?
-    GeoRuby::GeojsonFeatureCollection.new []
+    GeoRuby::GeoJSONFeatureCollection.new []
   else
-    GeoRuby::GeojsonParser.new.parse geojson
+    GeoRuby::GeoJSONParser.new.parse geojson
   end
 end
 
 def feature_for_input(options)
-  GeoRuby::GeojsonFeature.new(
+  GeoRuby::GeoJSONFeature.new(
     GeoRuby::SimpleFeatures::Point.from_x_y(options.fetch('lon'), options.fetch('lat')),
     {
       "marker-size"   => 'large',
