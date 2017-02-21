@@ -32,6 +32,8 @@ script/new \
     --city Berlin
 ```
 
+The `marker` field is the name of [any valid Maki icon](https://www.mapbox.com/maki-icons/).
+
 ### `script/new`
 
 ```text
