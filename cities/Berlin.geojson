@@ -1,1 +1,22 @@
-{"type":"FeatureCollection","features":[{"type":"Feature","geometry":{"type":"Point","coordinates":[13.39195,52.52502]},"properties":{"marker-size":"large","marker-color":"#BE9A6B","marker-symbol":"bar","name":"Aufsturz","address":"Oranienburger Straße 67, 10117 Berlin, Germany"}}]}
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.39195,
+          52.52502
+        ]
+      },
+      "properties": {
+        "marker-size": "large",
+        "marker-color": "#BE9A6B",
+        "marker-symbol": "bar",
+        "name": "Aufsturz",
+        "address": "Oranienburger Straße 67, 10117 Berlin, Germany"
+      }
+    }
+  ]
+}

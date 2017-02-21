@@ -75,6 +75,6 @@ end
 
 def write_features_for_city(city, city_features)
   File.open(city_geojson_file(city), 'wb') do |f|
-    f.puts city_features.to_json
+    f.puts JSON.pretty_generate(JSON.parse(city_features.to_json))
   end
 end
